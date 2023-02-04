@@ -1,0 +1,43 @@
+---
+- name: Provision and configure EC2 instance for Flask web app
+  hosts: all
+  become: yes
+
+  tasks:
+  - name: Install required packages
+    package:
+      name:
+        - python3
+        - python3-pip
+        - nginx
+    state: present
+
+  - name: Configure firewall
+    firewalld:
+      state: enabled
+      service: http
+      permanent: yes
+    become: yes
+
+  - name: Start Flask web app as a service
+    copy:
+      src: app.py
+      dest: /var/www/app.py
+    become: yes
+
+    command: |
+      cd /var/www/
+      nohup python3 app.py &
+    become: yes
+
+  - name: Configure Nginx as reverse proxy
+    copy:
+      src: nginx.conf
+      dest: /etc/nginx/nginx.conf
+    become: yes
+
+    command: |
+      systemctl restart nginx
+      systemctl enable nginx
+    become: yes
+    ...
