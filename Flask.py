@@ -1,10 +1,8 @@
 from flask import Flask
-
 app = Flask(__name__)
-
-@app.route("http://13.40.199.5000/")
+@app.route("/")
 def hello():
-    return "I AM A DEVOPS ENGINEER!"
+    return "I am almost a Devops Engineer!"
 
 if __name__ == "__main__":
-    app.run()
+    app.run(host='0.0.0.0', port=5000)
