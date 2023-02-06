@@ -21,13 +21,13 @@
 
   - name: Start Flask web app as a service
     copy:
-      src: app.py
-      dest: /var/www/app.py
+      src: flask.py
+      dest: /var/www/flask.py
     become: yes
 
     command: |
       cd /var/www/
-      nohup python3 app.py &
+      nohup python3 flask.py &
     become: yes
 
   - name: Configure Nginx as reverse proxy
