@@ -1,12 +1,12 @@
 ---
-- name: Deploy Flask App
+- name: Deploy Flask Web App
   hosts: g1
   become: yes
 
   tasks:
-    - name: Add the default Ubuntu repository
+    - name: Add the default Centos repository
       apt_repository:
-        repo: 'deb http://archive.ubuntu.com/ubuntu focal main'
+        repo: 'deb http://archive.centos.com/ubuntu focal main'
         state: present
 
     - name: Install required packages
@@ -18,7 +18,7 @@
 
     - name: Clone the Flask App repository
       git:
-        repo: https://github.com/CeeyIT-Solutions/flask-app.git
+        repo: https://github.com/elvisomofezi/Flask.git
         dest: /opt/flask-app
 
     - name: Install Flask and its dependencies
