@@ -1,56 +1,40 @@
 ---
-- name: Deploy Flask web app
-  hosts: f1
+- name: Deploy Flask App
+  hosts: g1
   become: yes
 
+  tasks:
+    - name: Add the default centos repository
+      yum_repository:
+        name: epel
+        description: EPEL YUM repo
+        baseurl: https://download.fedoraproject.org/pub/epel/$releasever/$basearch/
+        state: present
 
+    - name: Install packages
+      package:
+        name:
+          - python3
+          - python3-pip
+          - git
 
-tasks:
-  - name: Add a default centos repo
-    apt_repository:
-      repo: 'deb http://archive.ubuntu.com/ubuntu focal main'
-      state: present 
- 
-  - name: Install required packages
-    package:
-      name:
-        - python3
-        - python3-pip
-    state: present
-
-
-  - name: Start Flask web app as a service
-    copy:
-      src: flasktest.py
-      dest: /var/www/flaskweb
-    become: yes
-    
-     - name: Start Flask web app as a service
-    copy:
-      src: flasktest.py
-      dest: /var/www/flaskweb
-    become: yes
-
+    - name: Create the destination folder
+      file:
+        path: /opt/flaskwebapp
+        state: directory
 
     - name: Clone the repository
       git:
-        repo: https://github.com/elvisomofezi/Flask.git
-        dest: /var/Flaskweb
-     
+        repo: https://github.com/Elieno/flaskwebapp.git
+        dest: /opt/flaskwebapp
+
     - name: Install Flask and its dependencies
       pip:
         name: flask
-        virtualenv: /var/www/flasktest
-        chdir: /var/flaskweb
-    
-    
+        virtualenv: /opt/flask-env
+        chdir: /opt/flaskwebapp
 
-    command: |
-      cd /var/www/
-      nohup python3 flasktest.py &
-    become: yes
-
-   - name: Start the Flask web app
-      command: /var/flask-env/bin/python3 /opt/flaskweb/flasktest.py
+    - name: Start the Flask App
+      command: /opt/flask-env/bin/python3 /opt/flaskwebapp/flasktest.py
       async: 1
       poll: 0
