@@ -29,13 +29,13 @@
         dest: /opt/flaskwebapp
 
     - name: Install Flask
-      pip:
-        name: flask
-        
-     - name: Enable flask
-       service:
-          name: flask
-          state: started
-          enabled: yes
-       async: 1
-       poll: 0
+  pip:
+    name: flask
+
+- name: Enable Flask Service
+  service:
+    name: flask
+    state: started
+    enabled: yes
+  async: 1
+  poll: 0
