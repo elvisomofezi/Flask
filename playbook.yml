@@ -33,6 +33,7 @@
         name: flask
         
     - name: Enable flask service
+       service:
        name: flask
        enabled: yes
        poll: 0
