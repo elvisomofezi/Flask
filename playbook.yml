@@ -31,11 +31,9 @@
     - name: Install Flask
   pip:
     name: flask
-
-- name: Enable Flask Service
-  service:
-    name: flask
-    state: started
-    enabled: yes
-  async: 1
-  poll: 0
+    
+    -name: Start Flask Service
+    service:
+     name: flask
+     state: started
+     enabled: yes
