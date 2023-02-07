@@ -28,11 +28,11 @@
         repo: https://github.com/elvisomofezi/Flask.git
         dest: /opt/flaskwebapp
 
-    - name: Install Flask
+    - name: Install flask
   pip:
     name: flask
     
-    -name: Start Flask Service
+    -name: Start flask Service
     service:
      name: flask
      state: started
