@@ -28,12 +28,6 @@
         repo: https://github.com/elvisomofezi/Flask.git
         dest: /opt/flaskwebapp
 
-    - name: Install Flask and its dependencies
-      pip:
-        name: flask
-        virtualenv: /opt/flask-env
-        chdir: /opt/flaskwebapp
-
     - name: Start the Flask App
       command: /opt/flask-env/bin/python3 /opt/flaskwebapp/flasktest.py
       async: 1
