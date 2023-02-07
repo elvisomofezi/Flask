@@ -32,10 +32,8 @@
       pip:
         name: flask
         
-       
     - name: Enable flask
       Become: yes
-      File: 
-      Opt/flask-app
+      File: Opt/flask-app
       State: present
       poll: 0
