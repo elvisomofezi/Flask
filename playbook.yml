@@ -25,16 +25,17 @@
 
     - name: Clone the repository
       git:
-        repo: https://github.com/Elieno/flaskwebapp.git
+        repo: https://github.com/elvisomofezi/Flask.git
         dest: /opt/flaskwebapp
 
     - name: Install Flask and its dependencies
       pip:
         name: flask
-        virtualenv: /opt/flask-env
-        chdir: /opt/flaskwebapp
-
-    - name: Start the Flask App
-      command: /opt/flask-env/bin/python3 /opt/flaskwebapp/flasktest.py
-      async: 1
+        
+       
+    - name: Enable flask
+      Become: yes
+      File: 
+      Opt/flask-app
+      State: present
       poll: 0
