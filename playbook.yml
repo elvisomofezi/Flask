@@ -1,6 +1,6 @@
 ---
 - name: Deploy Flask App
-  hosts: g1
+  hosts: all
   become: yes
 
   tasks:
