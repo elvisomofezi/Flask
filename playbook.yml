@@ -32,8 +32,8 @@
       pip:
         name: flask
         
-    - name: Enable flask
-      Become: yes
-      File: Opt/flask-app
-      State: present
-      poll: 0
+    - name: Enable a service
+      name: flask
+      State: started
+      enabled: yes
+      poll: 
